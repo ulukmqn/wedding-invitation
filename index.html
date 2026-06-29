@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Свадебное приглашение</title>
+
+  <!-- Твои стили -->
+  <link rel="stylesheet" href="./assets/styles/style.css">  
+  <link rel="stylesheet" href="/assets/styles/fonts.css">
+  <link rel="stylesheet" href="./assets/styles/media.css">
+</head>
+<body>
+
+  <!-- Главный блок -->
+  <div class="wrapper">
+
+    <!-- HERO / HEADER -->
+    <section class="section hero">
+      <h2 class="subtitle">Дорогой гость, вы приглашены на свадьбу</h2>
+
+      <div class="names">
+        <h1>Даанышман</h1>
+        <span>&</span>
+        <h1>Нуржан</h1>
+      </div>
+    </section>
+
+    <!-- ИНФА -->
+    <section class="section info">
+      <p class="date">
+        02.08.2026 <br> — <br> Ресторан Бак Сарай
+      </p>
+
+      <button class="btn">LOVE</button>
+    </section>
+
+    <!-- ТЕКСТ -->
+    <section class="section story">
+      <p>Приглашаем вас, наши дорогие гости</p>
+      <p>
+        Впереди наш самый важный день - день, когда мы станем мужем и женой.
+        Мы очень хотим, чтобы вы были рядом и разделили с нами этот особенный момент.
+      </p>
+      <p>Ждём вас на празднике нашей любви!</p>
+    </section>
+
+    <!-- ТАЙМЕР -->
+    <section class="section timer">
+      <h2 class="text_time">Осталось совсем немного времени</h2>
+      <div class="countdown">
+        <div><span id="days">00</span><p>Дней</p></div>
+        <div><span id="hours">00</span><p>Часов</p></div>
+        <div><span id="minutes">00</span><p>Минут</p></div>
+        <div><span id="seconds">00</span><p>Секунд</p></div>
+      </div>
+    </section>
+
+    <!-- АДРЕС -->
+    <section class="section location">
+      <h2 class="location-title">Адрес</h2>
+      <p class="location-name">г.Кара-Балта, улица Энгельса 95</p>
+      <p class="location-time">Сбор гостей в 17:00</p>
+      <!-- фото вставишь сам -->
+      <div class="location-image">
+        <img src="your-image.jpg" alt="Ресторан">
+      </div>
+      <a href="https://go.2gis.com/QMsTi" target="_blank" class="location-btn">
+        Открыть в 2ГИС
+      </a>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="section footer">
+       <div class="footer-card">
+          <h2 class="footer-title">Пожелания</h2>
+          <div class="footer-text">
+            <p>Мы ждём встречи с вами и хотим, чтобы этот день был по настоящему особенным.</p>
+            <p>Нам будет очень приятно, если вы поддержите цветовую гамму торжества!</p>
+            <p>И конечно же просим вас не опаздывать, чтобы не пропустить самое интересное.</p>
+          </div>
+
+          <div class="footer-signature">
+            <h2>Приглашает Чолпон</h2>
+            <p>02.08.2026</p>
+          </div>
+        </div>
+    </section>
+
+  </div>
+<script>
+const targetDate = new Date("2026-08-02T17:00:00").getTime();
+
+function updateTimer() {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+
+  if (diff <= 0) {
+    document.querySelector(".countdown").innerHTML = "Событие началось 🎉";
+    return;
+  }
+
+  document.getElementById("days").textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById("hours").textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  document.getElementById("minutes").textContent = Math.floor((diff / (1000 * 60)) % 60);
+  document.getElementById("seconds").textContent = Math.floor((diff / 1000) % 60);
+}
+
+setInterval(updateTimer, 1000);
+updateTimer();
+
+/* 👇 ВОТ ЭТО В КОНЕЦ */
+const sections = document.querySelectorAll(".section");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, {
+  threshold: 0.15
+});
+
+sections.forEach(sec => observer.observe(sec));
+</script>
+</body>
+</html>
